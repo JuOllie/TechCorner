@@ -1,2 +1,1 @@
-# TechCorner
-A Personal Blog.
+My personal website.

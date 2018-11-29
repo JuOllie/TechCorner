@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>SUKRITI PAUL</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>SUKRITI</strong> PAUL</a>
+									<ul class="icons">
+										<li><a href="https://twitter.com/sukritiollie" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+										<li><a href="https://www.facebook.com/sukriti.paul.5" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+										<li><a href="https://medium.com/@sukritipaul005" class="icon fa-medium"><span class="label">Medium</span></a></li>
+										<li><a href="https://www.linkedin.com/in/sukriti-paul-72a115126/" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Banner -->
+								<section id="banner">
+									<div class="content">
+										<header>
+											<h1>Steerable Fast Bilateral Edge Detectors</h1>
+										</header>
+											Previously related works show that the bilateral filter can be modified to an edge detector, on modifying the Gaussian domain and range kernels. Although several techniques have been used to obtain computationally fast bilateral filters, we implemented an algorithm that had a reasonable trade-off between image accuracy and computational time. The concepts of fast bilateral filters were been coupled with bilateral edge detectors to design a fast bilateral edge detector. I proposed a noise-robust and computationally efficient algorithm for steerable fast bilateral edge detection using the concepts of steerability, edge detection via bilateral filters and fast bilateral filtering using Fourier kernels. Simulation results were presented along with the peak signal to noise ratio (PSNR) for various noisy and noise-free gray-scale images.  </br> </br> 
+
+											<h2>Fast Bilateral Edge Detection</h2>
+											<h3>Understanding Bilateral Edge Detectors</h3>
+											Based on the methodology proposed by A. Jose and C. S. Seelamantula[1], an inverted Gaussian range kernel and a high-pass domain kernel has been used to design a bilateral edge detector. <b>The inversion of the range kernel of a standard bilateral filter accentuates the dissimilarities of neighboring pixels, hence enhancing edge detection.</b> Two conditions have been taken into account while designing such a filter, <i>the requirement of a derivative spatial kernel that can perform edge detection and a range kernel that emphasizes dissimilar regions based on radiometric distance of pixels from the central pixel.</i> Higher weights are provided for regions with greater pixel dissimilarity, in contrary to what the original bilateral filter was designed for. Masks such as Roberts, Laplacian, Sobel, Prewitt or LoG maybe used as the domain kernel; these depend on the pixel intensity. We apply the above in acquiring steerable fast bilateral edge detectors, as discussed in the further subsections.
+
+											$$F\sigma_r (i) = 1.1 - e^{\frac{-(|f(i-j)-f(i)|)^2}{\sigma_r^2}}$$
+
+											The modified and biased range kernel is represented by (4) where \(f(x)\) is the intensity of the pixel at x , and \(|f(i-j)-f(i)|\) is the intensity difference between the pixels.A bias of 0.1 has been introduced to prevent the range kernel from reaching a value of 0. This is done so that the effect of spatial kernel is not cancelled out at such points. Detailed comparisons of performance on using Sobel and Laplacian masks as the domain kernel, and Canny edge detectors, have been carried out in [1].
+
+											 <!-- \(ax^2 + bx + c = 0\) and they are $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$ -->
+											</br></br>
+											 <h3>Fast Bilateral Edge Detection</h3>
+											 It is observed that a series of Gaussian convolutions can form a bilateral filter by using shiftable functions [3,4,17]. In addition to computational efficiency, Sanjay Ghosh and Kunal N. Chaudhury proposed a fast bilateral filtering algorithm using Fourier kernels, which assures sub pixel accuracy throughout the image. The Gaussian range kernel of a bilateral filter is approximated via a shiftable Fourier basis. You can find out about their research work here.
+											 
+											  A fast bilateral edge detector can be achieved by two modifications to the fast bilateral filtering algorithm mentioned above.
+											   <ul>
+											   	<li> A Laplacian filter is used as the spatial kernel.</li>
+											   	<li>An inverted Gaussian kernel is used as the range kernel. It highlights the neighboring pixel dissimilarity.</li>
+											   </ul>
+
+											   <blockquote>Algorithms 1 and 2 were designed by me, under the guidance of my professor, Dr. Chandra Sekhar Seelamantula.</blockquote>
+
+											   Algorithm 1 depicts the modified fast bilateral filter to give an edge detected image \(fb(i)\). \(w(i)\) is the Laplacian kernel and \(G^*(i)\) is the complex conjugate of \(G(i)\).
+
+											  <figure>
+												<img src="images/pic54.jpg" alt="" align="middle" class="cent2" height="300px" />
+											</figure>
+
+											<h2>Steerable Fast Bilateral Edge Detection</h2>
+											<h3>Steerable Filters</h3>
+										
+											Steerable filters provide the response of filters oriented at an arbitrary angle \( \theta\). Their uses range from orientation texture analysis to edge and corner detection. Ideally, a filter response in a direction orthogonal to feature boundary, is desired[14]. These filters are a linear combination of few rotated versions of itself differing by small angles, also known as basis filters. The filter response at an angle \( \theta\) is given by 
+
+
+											$$F^\theta(x,y) = \sum_{j=1}^{N} k_j(\theta) F^{\theta_j}(x,y)$$
+
+											where \(k_j(\theta)\)is the interpolation function corresponding to the $jth$ basis filter and \(N\) is the number of basis filters in the linear sum.The interpolation functions depend on \(\theta\).
+
+											<h3>Steerable Fast Bilateral edge Detection (Proposed Algorithm)</h3>
+											We modify the range and domain kernels of the fast bilateral filter approximation in [7],  to design a steerable fast bilateral edge detector as follows:
+
+											<ul>
+												<li>A steerable Gaussian kernel serves as the spatial kernel.We consider the first derivative of the standard Gaussian kernel rotated at angles \(0^\circ\) and \(90^\circ\).</li>
+												<li>For enhanced edge detection, the Gaussian range kernel in the Fast Bilateral Filtering Algorithm is inverted.Thus,neighbouring pixel dissimilarity is highlighted.</li>
+											</ul>
+
+											In Algorithm 2, \(G_x\) and \(G_y\) are the first derivatives of the Gaussian kernel \(w\),oriented at \(0^\circ\) and \(90^\circ\).We compute \(I_x\) and \(I_y\), the images obtained on convolution of \(I\) with \(G_x\) and \(G_y\) respectively.The approximated bilateral filter is composed of a series of Gaussian convolutions.We convolve the \(F\) and \(G\) with the Gaussian steerable filters, where \(\theta\) is the angle at which the filter is rotated, for each pixel.Both,the spatial and range kernels are normalized.
+  
+
+
+											<figure>
+												<img src="images/pic55.jpg" alt="" align="middle" class="cent2" height="300px" />
+											</figure>
+
+											<h2>Simulation Results</h2>
+
+											<h3>Simulation results for the proposed Algorithm 1</h3>
+											 The input is the 255X255 Lena image, \(\sigma_s=0.6\) and \(\varepsilon=1e-3\). </h3>
+												
+											<figure>
+												<img src="images/pic56.jpg" alt="" align="middle" class="cent2" height="150px" />
+											</figure>
+										</br>
+
+											<h3>Simulation results for the proposed Algorithm 2</h3>
+											Where \(\sigma_s=0.6,  \sigma_r=70,\) and \(\varepsilon=1e-3\).
+											<figure>
+												<img src="images/pic57.jpg" alt="" align="middle" class="cent2" height="300px" />
+											</figure>
+										</br>
+										<i>Note: Our research work and submission can be viewed here.  </i>
+											<a href="internship.html" class="button special">Return</a>
+										
+										<object data="IEEE_Journal.pdf" type="application/pdf" width="100%" height="100%">
+  <p>Alternative text - include a link <a href="myfile.pdf">to the PDF!</a></p>
+</object>
+									</div>
+								</section>
+
+							<!-- Section -->
+								
+
+							<!-- Section -->
+								<section>
+									
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+					<div id="sidebar">
+						<div class="inner">
+
+							<!-- Search -->
+								<section id="search" class="alt">
+									<form method="post" action="#">
+										<input type="text" name="query" id="query" placeholder="Search" />
+									</form>
+								</section>
+
+							<!-- Menu -->
+								<nav id="menu">
+									<header class="major">
+										<h2>Menu</h2>
+									</header>
+									<ul>
+										<li><a href="index.html">About Me</a></li>
+										<li><a href="index2.html">Explore</a></li>
+										<li>
+											<span class="opener">Technical Endeavours</span>
+											<ul>
+												<li><a href="interblog.html">Personal Blog</a></li>
+											</ul>
+										</li>
+										<li><a href="myvid.html">Gallery</a></li>
+										<li><a href="mygallery.html">Videos</a></li>
+										
+									</ul>
+								</nav>
+
+							
+							<!-- Section -->
+								<section>
+									<header class="major">
+										<h2>Get in Touch</h2>
+									</header>
+									<p>Feel free to contact me!</p>
+									<ul class="contact">
+										<li class="fa-envelope-o"><a href="#">sukritipaul005@gmail.com</a></li>
+			
+									</ul>
+								</section>
+
+							<!-- Footer -->
+								<footer id="footer">
+									<p class="copyright">&copy; Made by Sukriti </br> Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+								</footer>
+
+						</div>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
